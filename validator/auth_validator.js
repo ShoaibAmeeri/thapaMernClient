@@ -11,7 +11,7 @@ const signupSchema = z.object({
   email: z
     .string({ required_error: "Email is required" })
     .trim()
-    .email({message: "invalid Email address"})
+    .email({ message: "invalid Email address" })
     .min(3, { message: "Email must be atleast 3 chracters" })
     .max(256, { message: "Email must not be more than 256 chracters" }),
   phone: z
@@ -24,5 +24,17 @@ const signupSchema = z.object({
     .min(6, { message: "Password must be atleast 6 chracters" })
     .max(20, { message: "Password can't be greater than 20 chracters" }),
 });
+// const signinSchema = z.object({
+//   email: z
+//     .string({ required_error: "Email is required" })
+//     .trim()
+//     .email({message: "invalid Email address"})
+//     .min(3, { message: "Email must be atleast 3 chracters" })
+//     .max(256, { message: "Email must not be more than 256 chracters" }),
+//   password: z
+//     .string({ required_error: "Password is required" })
+//     .min(6, { message: "Password must be atleast 6 chracters" })
+//     .max(20, { message: "Password can't be greater than 20 chracters" }),
+// });
 
-module.exports = signupSchema
+module.exports = signupSchema;

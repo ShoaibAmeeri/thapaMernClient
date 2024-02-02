@@ -32,7 +32,8 @@ const register = async (req, res) => {
       userId: userCreated._id.toString(),
     });
   } catch (error) {
-    res.status(400).send({ msg: "page not found" });
+    // res.status(400).send({ msg: "page not found" });
+    next(error);
   }
 };
 
@@ -46,7 +47,8 @@ const login = async (req, res) => {
     }
 
     // const user = await bcrypt.compare(password, userExist.password);
-    const user = await userExist.comparePassword(password)
+
+    const user = await userExist.comparePassword(password);
     if (user) {
       res.status(200).json({
         status: "login successfully",
@@ -59,7 +61,10 @@ const login = async (req, res) => {
         .json({ message: "invalid email or password please check" });
     }
   } catch (error) {
-    res.status(500).json("internal server error");
+    res.status(500).json({ msg: error.message });
+    console.log(error);
+
+    // next(error)
   }
 };
 

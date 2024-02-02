@@ -1,17 +1,21 @@
 require("dotenv").config();
 const express = require("express");
-const router = require("./routes/auth");
+const authRoute = require("./routes/auth");
+const contactRoute = require("./routes/contact")
 const connectDb = require("./utils/db");
+const errorMiddleware = require("./middlewares/error-middleware");
 
 const app = express();
-app.use(express.json())
+app.use(express.json());
 
-app.use("/api/auth", router)
+app.use("/api/auth", authRoute);
+app.use("/api/form", contactRoute);
 
-connectDb().then(()=>{
+connectDb().then(() => {
+  app.use(errorMiddleware);
 
-    const Port = 8000
-    app.listen(Port, (req,res)=>{
-        console.log("your sever is now live on port", Port)
-    })
-})
+  const PORT = 8000;
+  app.listen(PORT, (req, res) => {
+    console.log("your sever is now live on PORT", PORT);
+  });
+});

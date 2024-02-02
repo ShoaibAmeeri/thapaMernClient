@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
 });
 
 // secure password
-userSchema.pre("save", async function (next) {  
+userSchema.pre("save", async function (next) {
   const user = this;
   console.log("pre : ", user);
 
@@ -39,7 +39,7 @@ userSchema.pre("save", async function (next) {
     const hash_password = await bcrypt.hash(user.password, saltRound);
     user.password = hash_password;
   } catch (error) {
-    next(error);  
+    next(error);
   }
 });
 
@@ -62,9 +62,9 @@ userSchema.methods.generateToken = async function () {
   }
 };
 
-  userSchema.methods.comparePassword = async function (password) {
-    return bcrypt.compare(password, this.password)
-  }
+userSchema.methods.comparePassword = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
 
 const User = new mongoose.model("User", userSchema);
 
