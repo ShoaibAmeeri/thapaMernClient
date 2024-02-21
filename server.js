@@ -10,7 +10,7 @@ const app = express();
 const cors = require("cors")
 
 const corsOptions = {
-  origin: 'http://localhost:5174',
+  origin: 'http://localhost:5173',
   methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
   credentials: true,
 }
@@ -22,11 +22,35 @@ app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/form", contactRoute);
 
-connectDb().then(() => {
-  app.use(errorMiddleware);
+// connectDb().then(() => {
+//   app.use(errorMiddleware);
 
-  const PORT = 5000;
-  app.listen(PORT, (req, res) => {
-    console.log("your sever is now live on PORT", PORT);
+//   const PORT = 8000;
+//   app.listen(PORT, (req, res) => {
+//     console.log("your sever is now live on PORT", PORT);
+//   });
+// });
+
+
+try {
+  
+connectDb()
+  
+  const port = process.env.PORT || 8000;
+  const server = process.env.HOST || "localhost";
+  
+  app.get("/", (req, res) => {
+    console.log("Connection successfull");
+    res
+    .status(200)
+    .json({ message: "the connection is established and work properly" });
   });
-});
+  
+  app.listen(port, server, () => {
+    console.log(`server is listening on http://${server}:${port}`);
+  });
+} catch (error) {
+ console.log(error.message) 
+}
+
+  
