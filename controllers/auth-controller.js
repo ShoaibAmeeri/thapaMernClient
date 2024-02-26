@@ -43,12 +43,13 @@ const login = async (req, res) => {
     const userExist = await User.findOne({ email });
 
     if (!userExist) {
+      console.log(password)
       return res.status(400).json({ message: "invalid credentials" });
     }
 
-    // const user = await bcrypt.compare(password, userExist.password);
+    const user = await bcrypt.compare(password, userExist.password);
 
-    const user = await userExist.comparePassword(password);
+    // const user = await userExist.comparePassword(password);
     if (user) {
       res.status(200).json({
         status: "login successfully",
@@ -68,10 +69,22 @@ const login = async (req, res) => {
   }
 };
 
+const user = async(req, res) => {
+  try {
+    
+    const userData = req.body
+    console.log(userData)
+    return res.status(200).json({msg : userData})
+  } catch (error) {
+    console.log(`error from the user route ${error}`)
+  }
+}
+
 module.exports = {
   home,
   register,
   login,
+  user 
 };
 
 // m/odule.exports = jo
