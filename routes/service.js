@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const contactForm = require('../controllers/contact-controller')
+const Services = require('../controllers/service-controller');
 
 
-router.route('/service').get(contactForm)
+router.route('/service').get(Services)
 
 
 

@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const authRoute = require("./routes/auth");
 const contactRoute = require("./routes/contact")
+const serviceRoute = require("./routes/service")
 const connectDb = require("./utils/db");
 const errorMiddleware = require("./middlewares/error-middleware");
 
@@ -21,7 +22,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoute);
 app.use("/api/form", contactRoute);
-app.use("/api/service", serviceRoute);
+app.use("/api/data", serviceRoute);
 
 // connectDb().then(() => {
 //   app.use(errorMiddleware);
