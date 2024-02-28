@@ -21,6 +21,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoute);
 app.use("/api/form", contactRoute);
+app.use("/api/service", serviceRoute);
 
 // connectDb().then(() => {
 //   app.use(errorMiddleware);
