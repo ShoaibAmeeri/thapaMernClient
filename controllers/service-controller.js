@@ -3,7 +3,7 @@ const Service = require("../models/service-model")
 
 
 
-const contactForm = async (req, res) => {
+const services = async (req, res) => {
     try {
        const response = await Service.find()
 
@@ -12,11 +12,11 @@ const contactForm = async (req, res) => {
         return
        }
        
-       return res.status(200).json({message : "got services list" , response})
+       return res.status(200).json({response})
     } catch (error) {
         res.status(500).json({err : error.message , msg: "message not delivered"})
     }
 
 }
 
-module.exports = contactForm
+module.exports = services
